@@ -18,7 +18,7 @@ Variables for this role:
 | variable | default value in defaults/main.yml | description |
 | -------- | ---------------------------------- | ----------- |
 | vscode_enabled | False | determine whether role is enabled (True) or not (False) |
-| vscode_users | [] | List of dicts for configuration of extensions and settings per use, see [Example Playbooks](##example-playbooks) |
+| vscode_users | [] | List of dicts for configuration of extensions and settings per use, see [Example Playbooks](#example) |
 | vscode_create_users | False | create users from vscode_users list of dicts. Meant for molecule testing only. |
 
 ## Dependencies
@@ -42,7 +42,7 @@ A minimal playbook:
     - role: ansible-role-vscode
 ```
 
-An example playbook with user extension and settings:
+An example playbook with user extension and settings: <a name="example"></a>
 
 ```yaml
 ---
@@ -119,5 +119,5 @@ See LICENSE file in repository.
 
 ## References
 
-[Visual Studio Code](https://code.visualstudio.com/docs/editor/command-line)
-[pigmonkey/ansible-aur](https://github.com/pigmonkey/ansible-aur)
+* [Visual Studio Code](https://code.visualstudio.com/docs/editor/command-line)
+* [pigmonkey/ansible-aur](https://github.com/pigmonkey/ansible-aur)
