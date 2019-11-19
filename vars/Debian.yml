@@ -1,0 +1,10 @@
+---
+# role: ansible-role-vscode
+# file: vars/Debian.yml
+
+vscode_required_packages:
+  - apt-transport-https
+  - ca-certificates
+  - nodejs
+  - libasound2
+  - libx11-xcb1

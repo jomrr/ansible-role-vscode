@@ -1,0 +1,7 @@
+---
+# role: ansible-role-vscode
+# file: tasks/main.yml
+
+- name: Import tasks for role ansible-role-vscode
+  import_tasks: tasks.yml
+  when: vscode_enabled | bool

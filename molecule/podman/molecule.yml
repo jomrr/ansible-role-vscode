@@ -1,0 +1,58 @@
+---
+# role: ansible-role-vscode
+# file: molecule/default/molecule.yml
+
+dependency:
+  name: galaxy
+driver:
+  name: podman
+lint:
+  name: yamllint
+  options:
+    config-file: molecule/shared/yamllint.yml
+platforms:
+  - name: vscode-default
+    image: ${MOLECULE_DIST:-"jam82/arch-molecule:latest"}
+    command: ${MOLECULE_DOCKER_CMD:-""}
+    pre_build_image: True
+    tty: True
+    tmpfs:
+      - /tmp
+      - /run
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+provisioner:
+  name: ansible
+  log: True
+  lint:
+    name: ansible-lint
+  playbooks:
+    converge: ../shared/playbook.yml
+  inventory:
+    group_vars:
+      all:
+        vscode_enabled: True
+        vscode_create_users: True
+        vscode_users:
+          - username: testuser
+            vscode_extensions_install:
+              - ms-python.python
+              - vscoss.vscode-ansible
+            vscode_extensions_remove: []
+            vscode_settings_force: True
+            vscode_settings: {
+              "telemetry.enableTelemetry": false,
+              "telemetry.enableCrashReporter": false
+            }
+scenario:
+  name: podman
+verifier:
+  name: testinfra
+  env:
+    PYTHONWARNINGS: "ignore"
+  directory: ../tests
+  options:
+    v: True
+    sudo: True
+  lint:
+    name: flake8

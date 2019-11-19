@@ -1,0 +1,81 @@
+---
+# role: ansible-role-vscode
+# file: tasks/tasks.yml
+
+- name: Set os_family dependent variables
+  include_vars: '{{ ansible_os_family }}.yml'
+
+- name: Set distribution dependent variables
+  include_vars: '{{ vars_file }}'
+  with_first_found:
+    - files:
+        - '{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'
+        - '{{ ansible_distribution }}.yml'
+        - '{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml'
+      skip: true
+  loop_control:
+    loop_var: vars_file
+
+- name: Include installation routines for ansible-role-vscode
+  include_tasks: 'install-{{ ansible_pkg_mgr }}.yml'
+
+- name: Create users
+  user:
+    name: "{{ item.username }}"
+    state: present
+  loop: "{{ vscode_users }}"
+  when: vscode_create_users | bool
+
+- name: Install extensions
+  become: yes
+  become_user: "{{ item.0.username }}"
+  command: "code --install-extension {{ item.1 }}"
+  register: vscode_install_ext
+  changed_when:
+    - vscode_install_ext.rc == 0
+    - '"already installed" not in vscode_install_ext.stdout'
+  loop: "{{ vscode_users | subelements('vscode_extensions_install') }}"
+
+- name: Remove extensions
+  become: yes
+  become_user: "{{ item.0.username }}"
+  command: "code --uninstall-extension {{ item.1 }}"
+  register: vscode_uninstall_ext
+  changed_when:
+    - vscode_uninstall_ext.rc == 0
+    - '"successfully uninstalled" not in vscode_uninstall_ext.stdout'
+  failed_when:
+    - vscode_uninstall_ext.rc == 0
+    - '"not installed" not in vscode_uninstall_ext.stdout'
+  loop: "{{ vscode_users | subelements('vscode_extensions_remove') }}"
+
+- name: Delete extension folders
+  become: yes
+  become_user: "{{ item.0.username }}"
+  file:
+    path: "~/.vscode/extensions/{{ item.1 }}"
+    state: absent
+  loop: "{{ vscode_users | subelements('vscode_extensions_remove') }}"
+
+- name: Create settings directory
+  become: yes
+  become_user: "{{ item.username }}"
+  file:
+    path: "~/.config/Code/User"
+    state: directory
+    owner: "{{ item.username }}"
+    mode: '700'
+    access_time: preserve
+    modification_time: preserve
+  loop: "{{ vscode_users }}"
+
+- name: Write settings file
+  become: yes
+  become_user: "{{ item.username }}"
+  template:
+    src: settings.json.j2
+    dest: "~/.config/Code/User/settings.json"
+    force: "{{ item.vscode_settings_force | default(False, True) }}"
+    mode: '600'
+  loop: "{{ vscode_users }}"
+  when: item.vscode_settings is defined and item.vscode_settings not in ({}, '', None, omit)

@@ -1,0 +1,9 @@
+---
+# role: ansible-role-vscode
+# file: molecule/shared/playbook.yml
+
+- name: Converge
+  hosts: all
+  become: True
+  roles:
+    - role: ansible-role-vscode

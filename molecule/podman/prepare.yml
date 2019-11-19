@@ -1,0 +1,30 @@
+---
+# role: ansible-role-vscode
+# file: molecule/podman/prepare.yml
+- name: Prepare
+  hosts: all
+  gather_facts: True
+  become: True
+  tasks:
+    - name: Update pacman cache
+      pacman:
+        update_cache: yes
+      when: ansible_distribution == 'Archlinux'
+
+    - name: Setup the aur_builder user
+      user:
+        name: aur_builder
+        create_home: yes
+        shell: '/usr/bin/bash'
+        uid: 576
+        password: '!'
+      when: ansible_distribution == 'Archlinux'
+
+    - name: Add aur_builder to sudoers.d
+      lineinfile:
+        path: /etc/sudoers.d/aur_builder
+        state: present
+        line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+        validate: /usr/sbin/visudo -cf %s
+        create: yes
+      when: ansible_distribution == 'Archlinux'

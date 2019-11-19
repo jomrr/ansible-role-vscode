@@ -1,0 +1,47 @@
+---
+# role: ansible-role-vscode
+# file: tasks/install-pacman.yml
+
+- name: Install prerequisites via {{ ansible_pkg_mgr }}
+  pacman:
+    name: "{{ vscode_required_packages }}"
+    state: present
+    update_cache: yes
+
+- name: Setup the aur_builder user
+  user:
+    name: aur_builder
+    create_home: yes
+    home: /var/lib/aur_builder
+    password: '!'
+    shell: '/bin/nologin'
+    system: yes
+    uid: 576
+  changed_when: False
+
+- name: Add aur_builder to sudoers.d
+  lineinfile:
+    path: /etc/sudoers.d/aur_builder
+    state: present
+    line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+    create: yes
+    validate: /usr/sbin/visudo -cf %s
+  changed_when: False
+
+- name: Install VisualStudio Code via {{ ansible_pkg_mgr }} (AUR)
+  aur:
+    name: visual-studio-code-bin
+    user: aur_builder
+
+- name: Remove aur_builder from sudoers.d
+  file:
+    path: /etc/sudoers.d/aur_builder
+    state: absent
+  changed_when: False
+
+- name: Remove aur_builder user
+  user:
+    name: aur_builder
+    remove: yes
+    state: absent
+  changed_when: False

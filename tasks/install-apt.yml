@@ -1,0 +1,26 @@
+---
+# role: ansible-role-vscode
+# file: tasks/install-apt.yml
+
+- name: Install prerequisites via {{ ansible_pkg_mgr }}
+  apt:
+    name: "{{ vscode_required_packages }}"
+    state: present
+    update_cache: yes
+
+- name: Install repository key via {{ ansible_pkg_mgr }}
+  apt_key:
+    url: 'https://packages.microsoft.com/keys/microsoft.asc'
+    state: present
+
+- name: Install VisualStudio Code repository via {{ ansible_pkg_mgr }}
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    filename: vscode
+    state: present
+
+- name: Install VisualStudio Code via {{ ansible_pkg_mgr }}
+  apt:
+    name: code
+    state: present
+    update_cache: yes
