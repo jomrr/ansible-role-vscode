@@ -18,14 +18,14 @@ Variables for this role:
 | variable | default value in defaults/main.yml | description |
 | -------- | ---------------------------------- | ----------- |
 | vscode_enabled | False | determine whether role is enabled (True) or not (False) |
-| vscode_users | [] | List of dicts for configuration of extensions and settings per use, see [Example Playbooks](##Example-Playbooks) |
+| vscode_users | [] | List of dicts for configuration of extensions and settings per use, see [Example Playbooks](##example-playbooks) |
 | vscode_create_users | False | create users from vscode_users list of dicts. Meant for molecule testing only. |
 
 ## Dependencies
 
 None.
 
-(##Example-Playbooks)
+## Example Playbooks
 
 A minimal playbook:
 
