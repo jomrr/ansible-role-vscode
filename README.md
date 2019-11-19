@@ -1,6 +1,6 @@
 # ansible-role-vscode [![Build Status](https://travis-ci.org/jam82/ansible-role-vscode.svg?branch=master)](https://travis-ci.org/jam82/ansible-role-vscode)
 
-Ansible role for setting up Visual Studio Code.
+Ansible role for setting up [Visual Studio Code](https://code.visualstudio.com/).
 
 ## Supported Platforms
 
@@ -42,7 +42,7 @@ A minimal playbook:
     - role: ansible-role-vscode
 ```
 
-An example playbook with user extension and settings: <a name="example"></a>
+An example playbook with user extensions and settings: <a name="example"></a>
 
 ```yaml
 ---
