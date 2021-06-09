@@ -1,4 +1,4 @@
-# ansible-role-vscode [![Build Status](https://travis-ci.org/jam82/ansible-role-vscode.svg?branch=master)](https://travis-ci.org/jam82/ansible-role-vscode)
+# ansible-role-vscode [![Build Status](https://travis-ci.org/jam82/ansible-role-vscode.svg?branch=main)](https://travis-ci.org/jam82/ansible-role-vscode)
 
 Ansible role for setting up [Visual Studio Code](https://code.visualstudio.com/).
 
