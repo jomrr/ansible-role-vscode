@@ -12,8 +12,8 @@ lint:
     config-file: molecule/shared/yamllint.yml
 platforms:
   - name: vscode-default
-    image: ${MOLECULE_DIST:-"jam82/arch-molecule:latest"}
-    command: ${MOLECULE_DOCKER_CMD:-""}
+    image: ${MOLECULE_DIST:-"jomrr/arch-molecule:latest"}
+    command: ~
     pre_build_image: True
     tty: True
     tmpfs:

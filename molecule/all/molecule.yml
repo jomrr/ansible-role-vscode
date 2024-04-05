@@ -12,106 +12,106 @@ lint:
     config-file: molecule/shared/yamllint.yml
 platforms:
   - name: vscode-amazon
-    image: "jam82/amazon-molecule:latest"
-    command: "/usr/lib/systemd/systemd"
+    image: "jomrr/amazon-molecule:latest"
+    command: ~
     pre_build_image: True
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: vscode-arch
-    image: "jam82/arch-molecule:latest"
-    command: "/usr/lib/systemd/systemd"
+    image: "jomrr/arch-molecule:latest"
+    command: ~
     pre_build_image: True
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: vscode-centos7
-    image: "jam82/centos-molecule:7"
-    command: "/usr/lib/systemd/systemd"
+    image: "jomrr/centos-molecule:7"
+    command: ~
     pre_build_image: True
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: vscode-centos8
-    image: "jam82/centos-molecule:8"
-    command: "/usr/lib/systemd/systemd"
+    image: "jomrr/centos-molecule:8"
+    command: ~
     pre_build_image: True
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: vscode-debian9
-    image: "jam82/debian-molecule:9"
-    command: "/lib/systemd/systemd"
+    image: "jomrr/debian-molecule:9"
+    command: ~
     pre_build_image: True
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: vscode-debian10
-    image: "jam82/debian-molecule:10"
-    command: "/lib/systemd/systemd"
+    image: "jomrr/debian-molecule:10"
+    command: ~
     pre_build_image: True
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: vscode-debian
-    image: "jam82/debian-molecule:latest"
-    command: "/lib/systemd/systemd"
+    image: "jomrr/debian-molecule:latest"
+    command: ~
     pre_build_image: True
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: vscode-suse15
-    image: "jam82/suse-molecule:15"
-    command: "/usr/lib/systemd/systemd"
+    image: "jomrr/suse-molecule:15"
+    command: ~
     pre_build_image: True
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: ssh-suse
-    image: "jam82/suse-molecule:latest"
-    command: "/usr/lib/systemd/systemd"
+    image: "jomrr/suse-molecule:latest"
+    command: ~
     pre_build_image: True
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: vscode-suse-tumbleweed
-    image: "jam82/suse-molecule:tumbleweed"
-    command: "/usr/lib/systemd/systemd"
+    image: "jomrr/suse-molecule:tumbleweed"
+    command: ~
     pre_build_image: True
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: vscode-oracle7
-    image: "jam82/oracle-molecule:7"
-    command: "/usr/lib/systemd/systemd"
+    image: "jomrr/oracle-molecule:7"
+    command: ~
     pre_build_image: True
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: vscode-oracle
-    image: "jam82/oracle-molecule:latest"
-    command: "/usr/lib/systemd/systemd"
+    image: "jomrr/oracle-molecule:latest"
+    command: ~
     pre_build_image: True
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: vscode-ubuntu1604
-    image: "jam82/ubuntu-molecule:16.04"
-    command: "/lib/systemd/systemd"
+    image: "jomrr/ubuntu-molecule:16.04"
+    command: ~
     pre_build_image: True
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: vscode-ubuntu1804
-    image: "jam82/ubuntu-molecule:18.04"
-    command: "/lib/systemd/systemd"
+    image: "jomrr/ubuntu-molecule:18.04"
+    command: ~
     pre_build_image: True
     privileged: True
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - name: vscode-ubuntu
-    image: "jam82/ubuntu-molecule:latest"
-    command: "/lib/systemd/systemd"
+    image: "jomrr/ubuntu-molecule:latest"
+    command: ~
     pre_build_image: True
     privileged: True
     volumes:
